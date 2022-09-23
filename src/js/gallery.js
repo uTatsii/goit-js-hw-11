@@ -26,4 +26,5 @@ function onFormSubmit(e) {
 
 function renderImages(request) {
   loadImagesByRequest(request);
+
 }
