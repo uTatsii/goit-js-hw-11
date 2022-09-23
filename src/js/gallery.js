@@ -26,10 +26,3 @@ function onFormSubmit(e) {
 
   loadImagesByRequest(request);
 }
-
-function galleryMarkup() {
-  gallery.insertAdjacentHTML(
-    'beforeend',
-    galleryMarkup(neededResponsParameters)
-  );
-}

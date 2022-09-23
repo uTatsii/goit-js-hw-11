@@ -1,13 +1,15 @@
-export default function galleryCardMarkup({
-  largeImageURL,
-  webformatURL,
-  tags,
-  likes,
-  views,
-  comments,
-  downloads,
-}) {
-  return `
+export default function galleryCardMarkup(images, galleryEl) {
+  const markup = images.map(
+    ({
+      largeImageURL,
+      webformatURL,
+      tags,
+      likes,
+      views,
+      comments,
+      downloads,
+    }) => {
+      return `
   <div class="photo-card">
     <a class='photo-card-thumb' href=${largeImageURL}>
         <img 
@@ -35,4 +37,8 @@ export default function galleryCardMarkup({
         </p>
     </div>
     </div>`;
+    }
+  );
+
+  galleryEl.innerHTML = markup;
 }
