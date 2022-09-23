@@ -1,4 +1,4 @@
-export { optionsToString, fetchImages, loadImagesByRequest, loadMore };
+export { loadImagesByRequest, loadMore };
 const axios = require('axios').default;
 
 const BASE_URL = 'https://pixabay.com/api/';

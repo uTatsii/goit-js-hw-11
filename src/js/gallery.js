@@ -1,8 +1,5 @@
 import './markup';
-import {
-  loadImagesByRequest,
-  loadMore,
-} from './fetchImages';
+import { loadImagesByRequest, loadMore } from './fetchImages';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const form = document.querySelector('#search-form');
@@ -24,5 +21,9 @@ function onFormSubmit(e) {
 
   const request = e.target.searchQuery.value;
 
+  renderImages(request);
+}
+
+function renderImages(request) {
   loadImagesByRequest(request);
 }
