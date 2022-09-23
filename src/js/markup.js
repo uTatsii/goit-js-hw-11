@@ -38,7 +38,7 @@ export default function galleryCardMarkup(images, galleryEl) {
     </div>
     </div>`;
     }
-  );
+  ).join('');
 
   galleryEl.innerHTML = markup;
 }
