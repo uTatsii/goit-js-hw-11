@@ -7,7 +7,7 @@ export default function galleryCardMarkup(images, galleryEl) {
       likes,
       views,
       comments,
-      downloads,
+      downloads
     }) => {
       return `
   <div class="photo-card">

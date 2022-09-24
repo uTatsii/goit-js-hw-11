@@ -36,11 +36,11 @@ function optionsToString() {
 }
 
 async function fetchImages(request) {
-  const response = await axios(
+  const response = await axios.get(
     `${BASE_URL}?key=${API_KEY}&q=${request}&${optionsToString()}`
   );
   if (response.status === 200) {
-    return response.data;
+    return Promise.resolve(response.data);
   } else {
     throw new Error(response.statusText);
   }
