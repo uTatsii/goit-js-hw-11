@@ -25,7 +25,9 @@ async function loadImagesByRequest(request) {
   loaded = 0;
   const response = await fetchImages(request);
   loaded += response.hits.length;
+  console.log(loaded);
   totalHits = response.totalHits;
+  console.log(totalHits);
   return response;
 }
 

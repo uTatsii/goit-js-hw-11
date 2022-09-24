@@ -21,9 +21,9 @@ function onFormSubmit(e) {
 
   const request = e.target.searchQuery.value;
 
-  renderImages(request);
+  console.log(loadImagesByRequest(request));
 }
 
-function renderImages(request) {
-  loadImagesByRequest(request);
-}
+// function renderImages(request) {
+//   loadImagesByRequest(request);
+// }
