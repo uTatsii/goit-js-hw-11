@@ -1,0 +1,1 @@
+{"mappings":"ACAA","sources":["index.d3a675d6.css","src/css/styles.css"],"sourcesContent":["ul, li, img, a, form, input, button {\n  margin: 0;\n  padding: 0;\n}\n\n/*# sourceMappingURL=index.d3a675d6.css.map */\n","ul, li, img, a, form, input, button {\n    margin: 0;\n    padding: 0;\n}\n\n"],"names":[],"version":3,"file":"index.d3a675d6.css.map"}
