@@ -40,7 +40,7 @@ async function fetchImages(request) {
     `${BASE_URL}?key=${API_KEY}&q=${request}&${optionsToString()}`
   );
   if (response.status === 200) {
-    return Promise.resolve(response.data);
+    return response.data;
   } else {
     throw new Error(response.statusText);
   }

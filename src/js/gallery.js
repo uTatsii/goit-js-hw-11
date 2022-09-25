@@ -1,6 +1,7 @@
 import './markup';
 import { loadImagesByRequest, loadMore } from './fetchImages';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import galleryCardMarkup from './markup';
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
@@ -22,7 +23,8 @@ async function onFormSubmit(e) {
   const request = e.target.searchQuery.value;
 
   const val = await loadImagesByRequest(request);
-  console.log(val);
+  const images = val.hits;
+  galleryCardMarkup(images, gallery);
 }
 
 // function renderImages(request) {
