@@ -16,12 +16,13 @@ const neededResponsParameters = {
 
 form.addEventListener('submit', onFormSubmit);
 
-function onFormSubmit(e) {
+async function onFormSubmit(e) {
   e.preventDefault();
 
   const request = e.target.searchQuery.value;
 
-  console.log(loadImagesByRequest(request));
+  const val = await loadImagesByRequest(request);
+  console.log(val);
 }
 
 // function renderImages(request) {
