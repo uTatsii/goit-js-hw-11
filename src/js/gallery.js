@@ -1,16 +1,21 @@
-import './markup';
-import { loadImagesByRequest, loadMore, canLoadMore } from './fetchImages';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { loadImagesByRequest, loadMore, canLoadMore, totalHits } from './fetchImages';
 import galleryCardMarkup from './markup';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 let request = '';
-loadMoreBtn.style.display = 'none';
 
 form.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
+loadMoreBtn.style.display = 'none';
+
+new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+});
 
 async function onFormSubmit(e) {
   e.preventDefault();
@@ -26,6 +31,7 @@ async function onFormSubmit(e) {
     clearGallery();
   } else {
     clearGallery();
+    Notify.success(`Hooray! We found ${totalHits} images.`);
     galleryCardMarkup(images, gallery);
     loadMoreBtn.style.display = 'block';
   }
