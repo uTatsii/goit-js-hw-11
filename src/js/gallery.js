@@ -7,6 +7,7 @@ const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 let request = '';
+loadMoreBtn.style.display = 'none';
 
 form.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
@@ -26,6 +27,7 @@ async function onFormSubmit(e) {
   } else {
     clearGallery();
     galleryCardMarkup(images, gallery);
+    loadMoreBtn.style.display = 'block';
   }
 }
 
