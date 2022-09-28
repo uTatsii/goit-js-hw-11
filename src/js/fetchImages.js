@@ -1,4 +1,4 @@
-export { loadImagesByRequest, loadMore };
+export { loadImagesByRequest, loadMore, canLoadMore, totalHits };
 const axios = require('axios').default;
 
 const BASE_URL = 'https://pixabay.com/api/';
@@ -8,14 +8,21 @@ const requestOptions = {
   orientation: 'horizontal',
   safesearch: true,
   page: 1,
-  per_page: 20,
+  per_page: 40,
 };
-let totalHits = 0;
-let loaded = 0;
+const receivedOptions = {
+  totalHits: 0,
+  loaded: 0,
+}
+let { totalHits, loaded } = receivedOptions;
 
-async function loadMore() {
-  page += 1;
-  const response = await fetchImages();
+function canLoadMore() {
+  return Boolean(totalHits - loaded);
+}
+
+async function loadMore(request) {
+  requestOptions.page += 1;
+  const response = await fetchImages(request);
   loaded += response.hits.length;
   return response;
 }
