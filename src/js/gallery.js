@@ -24,27 +24,37 @@ async function onFormSubmit(e) {
 
   request = e.target.searchQuery.value;
   const response = await loadImagesByRequest(request);
-  const images = response.hits;
+  const imagesData = response.hits;
   clearGallery();
 
-  if (images.length === 0) {
+  galleryCardMarkup(imagesData, gallery);
+  initializeSimpleLightbox();
+  photoGallery.refresh();
+
+  if (imagesData.length === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
     loadMoreBtn.style.display = 'none';
+    return;
+  }
+  if (imagesData.length < 40) {
+    Notify.failure(
+      "We're sorry, but you've reached the end of search results."
+    );
+    loadMoreBtn.style.display = 'none';
+    return;
   } else {
-    galleryCardMarkup(images, gallery);
     Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
-    showPhoto();
   }
 }
 
 async function onLoadMoreBtnClick(e) {
   if (canLoadMore()) {
     const response = await loadMore(request);
-    const images = response.hits;
-    galleryCardMarkup(images, gallery);
+    const imagesData = response.hits;
+    galleryCardMarkup(imagesData, gallery);
     photoGallery.refresh();
     scrollOnLoadMore();
   } else {
@@ -59,11 +69,10 @@ function clearGallery() {
   gallery.innerHTML = '';
 }
 
-function showPhoto() {
- photoGallery = new SimpleLightbox('.gallery a', {
+function initializeSimpleLightbox() {
+  photoGallery = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
- });
-  photoGallery.refresh();
+  });
   return photoGallery;
 }
 

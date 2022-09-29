@@ -17,7 +17,7 @@ const receivedOptions = {
 let { totalHits, loaded } = receivedOptions;
 
 function canLoadMore() {
-  return Boolean(totalHits - loaded);
+  return totalHits !== loaded;
 }
 
 async function loadMore(request) {
