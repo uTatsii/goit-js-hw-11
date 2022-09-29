@@ -1,4 +1,9 @@
-import { loadImagesByRequest, loadMore, canLoadMore, totalHits } from './fetchImages';
+import {
+  loadImagesByRequest,
+  loadMore,
+  canLoadMore,
+  totalHits,
+} from './fetchImages';
 import galleryCardMarkup from './markup';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
@@ -13,27 +18,32 @@ form.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
 loadMoreBtn.style.display = 'none';
 
-new SimpleLightbox('.gallery a', {
-  captionDelay: 250,
-});
-
 async function onFormSubmit(e) {
   e.preventDefault();
 
   request = e.target.searchQuery.value;
-
   const response = await loadImagesByRequest(request);
   const images = response.hits;
+
   if (images.length === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
     clearGallery();
+    loadMoreBtn.style.display = 'none';
+  } else if (images.length <= 40) {
+    clearGallery();
+    galleryCardMarkup(images, gallery);
+    Notify.failure(
+      "We're sorry, but you've reached the end of search results."
+    );
+    loadMoreBtn.style.display = 'none';
   } else {
     clearGallery();
-    Notify.success(`Hooray! We found ${totalHits} images.`);
     galleryCardMarkup(images, gallery);
+    Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
+    showBigPhoto();
   }
 }
 
@@ -42,13 +52,22 @@ async function onLoadMoreBtnClick(e) {
     const response = await loadMore(request);
     const images = response.hits;
     galleryCardMarkup(images, gallery);
+    showBigPhoto();
   } else {
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
+    loadMoreBtn.style.display = 'none';
   }
 }
 
 function clearGallery() {
   gallery.innerHTML = '';
+}
+
+function showBigPhoto() {
+  const photoGallery = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+  });
+  return photoGallery;
 }
