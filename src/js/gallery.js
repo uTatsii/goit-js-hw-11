@@ -79,7 +79,6 @@ function initializeSimpleLightbox() {
   photoGallery = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
   });
-  return photoGallery;
 }
 
 function scrollOnLoadMore() {
