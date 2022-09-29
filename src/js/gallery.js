@@ -25,14 +25,11 @@ async function onFormSubmit(e) {
   request = e.target.searchQuery.value;
   let response = null;
   try {
-   response = await loadImagesByRequest(request);
+    response = await loadImagesByRequest(request);
   } catch (error) {
     Notify.failure('Error');
     return;
   }
-  canLoadMore()
-    ? (loadMoreBtn.style.display = 'block')
-    : (loadMoreBtn.style.display = 'none');
   const imagesData = response.hits;
   clearGallery();
 
@@ -52,11 +49,12 @@ async function onFormSubmit(e) {
       "We're sorry, but you've reached the end of search results."
     );
     loadMoreBtn.style.display = 'none';
-    return;
   } else {
     Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
   }
+  
+  loadMoreBtn.style.display = canLoadMore() ? 'block' : 'none';
 }
 
 async function onLoadMoreBtnClick() {
