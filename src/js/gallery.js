@@ -12,6 +12,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+let photoGallery = '';
 let request = '';
 
 form.addEventListener('submit', onFormSubmit);
@@ -44,7 +45,7 @@ async function onLoadMoreBtnClick(e) {
     const response = await loadMore(request);
     const images = response.hits;
     galleryCardMarkup(images, gallery);
-    showPhoto();
+    photoGallery.refresh();
     scrollOnLoadMore();
   } else {
     Notify.failure(
@@ -59,9 +60,10 @@ function clearGallery() {
 }
 
 function showPhoto() {
-  const photoGallery = new SimpleLightbox('.gallery a', {
+ photoGallery = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
-  });
+ });
+  photoGallery.refresh();
   return photoGallery;
 }
 
