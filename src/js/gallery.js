@@ -31,13 +31,6 @@ async function onFormSubmit(e) {
     );
     clearGallery();
     loadMoreBtn.style.display = 'none';
-  } else if (images.length <= 40) {
-    clearGallery();
-    galleryCardMarkup(images, gallery);
-    Notify.failure(
-      "We're sorry, but you've reached the end of search results."
-    );
-    loadMoreBtn.style.display = 'none';
   } else {
     clearGallery();
     galleryCardMarkup(images, gallery);
