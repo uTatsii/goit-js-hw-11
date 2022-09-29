@@ -35,7 +35,7 @@ async function onFormSubmit(e) {
     galleryCardMarkup(images, gallery);
     Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
-    showBigPhoto();
+    showPhoto();
   }
 }
 
@@ -44,7 +44,7 @@ async function onLoadMoreBtnClick(e) {
     const response = await loadMore(request);
     const images = response.hits;
     galleryCardMarkup(images, gallery);
-    showBigPhoto();
+    showPhoto();
     scrollOnLoadMore();
   } else {
     Notify.failure(
@@ -58,7 +58,7 @@ function clearGallery() {
   gallery.innerHTML = '';
 }
 
-function showBigPhoto() {
+function showPhoto() {
   const photoGallery = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
   });
