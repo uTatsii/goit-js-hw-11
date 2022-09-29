@@ -24,15 +24,14 @@ async function onFormSubmit(e) {
   request = e.target.searchQuery.value;
   const response = await loadImagesByRequest(request);
   const images = response.hits;
+  clearGallery();
 
   if (images.length === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-    clearGallery();
     loadMoreBtn.style.display = 'none';
   } else {
-    clearGallery();
     galleryCardMarkup(images, gallery);
     Notify.success(`Hooray! We found ${totalHits} images.`);
     loadMoreBtn.style.display = 'block';
