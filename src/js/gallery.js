@@ -12,7 +12,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-let photoGallery = '';
+let photoGallery = null;
 let request = '';
 
 form.addEventListener('submit', onFormSubmit);
@@ -23,7 +23,13 @@ async function onFormSubmit(e) {
   e.preventDefault();
 
   request = e.target.searchQuery.value;
-  const response = await loadImagesByRequest(request);
+  let response = null;
+  try {
+   response = await loadImagesByRequest(request);
+  } catch (error) {
+    Notify.failure('Error');
+    return;
+  }
   const imagesData = response.hits;
   clearGallery();
 
