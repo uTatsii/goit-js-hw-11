@@ -30,6 +30,9 @@ async function onFormSubmit(e) {
     Notify.failure('Error');
     return;
   }
+  canLoadMore()
+    ? (loadMoreBtn.style.display = 'block')
+    : (loadMoreBtn.style.display = 'none');
   const imagesData = response.hits;
   clearGallery();
 
