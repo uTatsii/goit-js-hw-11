@@ -46,6 +46,7 @@ async function onLoadMoreBtnClick(e) {
     const images = response.hits;
     galleryCardMarkup(images, gallery);
     showBigPhoto();
+    scrollOnLoadMore();
   } else {
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
@@ -63,4 +64,14 @@ function showBigPhoto() {
     captionDelay: 250,
   });
   return photoGallery;
+}
+
+function scrollOnLoadMore() {
+  const { height: cardHeight } =
+    gallery.firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2 - 80,
+    behavior: 'smooth',
+  });
 }
