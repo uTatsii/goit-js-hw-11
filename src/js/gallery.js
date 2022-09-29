@@ -50,7 +50,7 @@ async function onFormSubmit(e) {
   }
 }
 
-async function onLoadMoreBtnClick(e) {
+async function onLoadMoreBtnClick() {
   if (canLoadMore()) {
     const response = await loadMore(request);
     const imagesData = response.hits;
